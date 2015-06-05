@@ -1,0 +1,64 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:http="http://www.springframework.org/schema/integration/http"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/integration 
+        http://www.springframework.org/schema/integration/spring-integration-2.0.xsd 
+	    http://www.springframework.org/schema/integration/http 
+	    http://www.springframework.org/schema/integration/http/spring-integration-http-2.1.xsd">
+	    
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="com.zdsoft.framework.commweb.util.MappingFastjsonHttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- 让Spring通过自动扫描来查询和管理Bean -->
+	<context:component-scan base-package="com.zdsoft.guarantee.p2p.controller,com.zdsoft.guarantee.p2p.page" />
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/modules/" />
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- spring上传文件配置 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 上传文件最大限制为20M -->
+		<property name="maxUploadSize" value="20480000" />
+		<property name="maxInMemorySize" value="4096" />
+	</bean>
+
+	<!-- 国际化配置 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/res/common-messages</value>
+				<value>/res/craclient-messages</value>
+			</list>
+		</property>
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+
+	<!-- 导入公共Spring配置文件 -->
+	<import resource="classpath:META-INF/spring/spring-common-context.xml" />
+	
+	<!-- 导入Common Web配置文件 -->
+	<import resource="classpath:META-INF/spring/spring-commweb-mvc.xml" />
+	
+	<!-- 导入CRA Client MVC配置文件 -->
+	<import resource="classpath:META-INF/spring/spring-craclient-mvc.xml" />
+
+	<!-- 导入Essential Web配置文件 -->
+	<import resource="classpath:spring/spring-cedclient-mvc.xml" />
+	
+	<!-- 导入workFlow 配置文件 
+	<import resource="classpath:spring/spring-workflow-mvc.xml" />-->
+
+</beans>

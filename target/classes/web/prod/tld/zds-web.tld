@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>ZDS Uri Converter</description>
+	<display-name>ZDS Uri</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>z</short-name>
+	<uri>http://www.zdsoft.cn/tags</uri>
+
+	<tag>
+		<name>ukey</name>
+		<tag-class>com.zdsoft.framework.commweb.tag.UriConvertTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description> resolve a key to uri</description>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>uri context</description>
+			<name>context</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>res</name>
+		<tag-class>com.zdsoft.framework.cra.tag.ResourceConvertTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			
+			<name>resource</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			
+			<name>application</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			
+			<name>isDefault</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>view-comp</name>
+		<tag-class>com.zdsoft.framework.cra.tag.ViewComponentTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>resource</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>application</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>version</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<function>  
+        <!-- 定义第一个函数：jsconst -->  
+        <name>jsconst</name>  
+        <!-- 定义函数处理类 -->  
+        <function-class>com.zdsoft.framework.common.util.StringHelper</function-class>  
+        <!-- 定义函数的对应方法 -->  
+        <function-signature>  
+            java.lang.String formatJsString(java.lang.String)  
+        </function-signature>  
+         <example>${z:jsconst(str)}</example>
+    </function>  
+</taglib>
